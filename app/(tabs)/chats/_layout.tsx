@@ -58,7 +58,7 @@ const Layout = () => {
         name="[id]"
         options={{
           title: "",
-          //   headerBackTitleVisible: false,
+            headerBackVisible: false,
           headerTitle: () => (
             <View
               style={{

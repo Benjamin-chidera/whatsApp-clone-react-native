@@ -1,4 +1,3 @@
-
 import Colors from "@/constants/Colors";
 import { format } from "date-fns";
 import { Link } from "expo-router";
@@ -27,7 +26,7 @@ const ChatRow: FC<ChatRowProps> = ({
 }) => {
   return (
     <AppleStyleSwipeableRow>
-      <Link href={`/`} asChild>
+      <Link href={`/(tabs)/chats/${id}`} asChild>
         <TouchableHighlight
           activeOpacity={0.8}
           underlayColor={Colors.lightGray}
