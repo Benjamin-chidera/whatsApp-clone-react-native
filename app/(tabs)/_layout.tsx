@@ -1,45 +1,92 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
-import { Platform } from 'react-native';
+import { View, Text } from "react-native";
+import React from "react";
+import { Tabs } from "expo-router";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import {
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
+import Colors from "@/constants/Colors";
 
-import { HapticTab } from '@/components/HapticTab';
-import { IconSymbol } from '@/components/ui/IconSymbol';
-import TabBarBackground from '@/components/ui/TabBarBackground';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
-
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const Layout = () => {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            // Use a transparent background on iOS to show the blur effect
-            position: 'absolute',
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Tabs
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: Colors.background,
           },
-          default: {},
-        }),
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+          tabBarActiveTintColor: Colors.primary,
+          tabBarInactiveBackgroundColor: Colors.background,
+          tabBarActiveBackgroundColor: Colors.background,
+
+          headerStyle: {
+            backgroundColor: Colors.background,
+          },
+
+          headerShadowVisible: false,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="update"
+          options={{
+            title: "Update",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="update" size={size} color={color} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="calls"
+          options={{
+            title: "Calls",
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="phone-outline"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="communities"
+          options={{
+            title: "Communities",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialIcons name="people" size={size} color={color} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="chats"
+          options={{
+            title: "Chats",
+            headerShown: false,
+            tabBarIcon: ({ color, size }) => (
+              <Ionicons name="chatbubbles" size={size} color={color} />
+            ),
+          }}
+        />
+
+        <Tabs.Screen
+          name="settings"
+          options={{
+            title: "Settings",
+            tabBarIcon: ({ size, color }) => (
+              <Ionicons name="cog" size={size} color={color} />
+            ),
+            headerShown: false,
+          }}
+        />
+      </Tabs>
+    </GestureHandlerRootView>
   );
-}
+};
+
+export default Layout;
